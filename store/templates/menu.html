@@ -1,0 +1,198 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'menu.css' %}">
+    <title>SDP project</title>
+  </head>
+
+  <body>
+
+  
+      <!--navbar start-->
+    <div class="fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ '/media/images/user.svg' }}">
+          </a>
+          
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% if user.is_authenticated %}
+            <li><a class="nav-link dropdown-item" href="">{{ user.username|title }}</a></li>
+            <hr>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:orders' %}" >Order History</a>
+            </li>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:roomorders' %}" >Booking History</a>
+            </li>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:logout' %}" >Logout</a>
+            </li>
+            {% else %}
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:signup' %}" >Signup</a>
+            </li>
+            <hr>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:login' %}" >Login</a>
+            </li>
+            {% endif %}
+            </ul>
+            
+        </li>
+         
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'store:menu' %}">Menu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:rooms' %}">Book Rooms</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:cart' %}">Cart</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:roomcart' %}">Bookings-Cart</a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:about' %}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:home' %}#ourteam">Our team</a>
+              </li>
+
+              {% if user.username == 'admin' %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:visualize' %}">Visualize</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:optimize' %}">Optimize</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+    </nav>
+    
+
+    </div>
+    <!--navbar ends-->
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+  {% for m in menu %}
+    <!-- menu start-->
+    <div class="container">
+        <!--non-veg menu start-->
+        <br>
+        <div class="row">
+            <h4 class="menutype">{{ m.name }}<a href="{{ m.get_absolute_url }}"><button type="button" class="btn btn-outline-secondary">view all</button></a></h4>
+            <hr>
+
+          {% for i in items %}
+          {% if i.menu.name == m.name %}
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ i.image.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <p class="card-text"><strong>🍽 {{ i.item_name }}</strong></p>
+                      <p class="card-text"><strong>&#8377;{{ i.price }} per serving</strong></p>
+                      <a href="{{ i.get_absolute_url }}" class="btn btn-outline-danger">View</a>
+                    </div>
+                  </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+
+    </div>
+    </div>
+    {% endfor %}
+    <!--menu ends-->
+
+
+
+
+<br>
+<br>
+<br>
+
+
+
+
+
+ <!--page footer start-->
+ <div class="bg-dark footer">
+    <div class="container">
+       <div class="row text-center">
+        <a href="home.html"><img src="{{ '/media/images/below-logo.jpeg' }}" ></a>
+       </div>
+
+       <hr style="color:gray">
+
+       <div class="row text-center" style="color: ivory;">
+         <div class="col">
+           <ul>
+             
+              <h5><u>QUICK LINKS</u></h5>
+             
+             <li>
+              <a href="contact.html">contact us</a>
+            </li>
+            <li>
+              <a href="gallery.html">gallery</a>
+            </li>
+            <li>
+              <a href="home.html#ourteam">our team</a>
+            </li>
+            <li>
+              <a href="aboutus.html">about us</a>
+            </li>
+           </ul>
+         </div>
+
+         <div class="col">
+          <h5><u>ADDRESS</u></h5> 
+          <p>Cosmopolitan Restaurant,<br>Hyderabad.<br>pincode:500 020<br>email: abc@gmail.com</p>
+         </div>
+
+         <div class="col">
+           <h5><u>VISIT US AT</u></h5>
+           
+           <a href="#facebook" class="fa fa-facebook"></a>
+           <a href="https://youtu.be/mAFltQ2H8nA" class="fa fa-youtube"></a>
+           <a href="#instagram" class="fa fa-instagram"></a>
+         </div>
+       </div>
+    </div>
+  </div>
+    <!--page footer ends-->
+    
+
+  </body>
+</html>

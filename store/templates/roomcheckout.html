@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Title</title>
+    {% load static %}
+  {% load cart %}
+</head>
+<body>
+{% include 'message.html' %}
+
+<form action="{% url 'store:roomcheck' %}" method="POST">
+                {% csrf_token %}
+    <!-- Grid row -->
+
+
+      <!-- Grid column -->
+      <div class="col-lg-8">
+        <div class="form-row">
+ <div class="col-auto">
+      <label >checkin Date</label>
+      <input type="date" class="form-control"  name="checkin" placeholder="check-in" required>
+
+    </div>
+        <div class="col-auto">
+      <label >Days</label>
+      <input type="number" min="1" class="form-control"  name="daycount" placeholder="Number of days" required>
+
+    </div>
+        <div class="col-auto">
+      <label >Adult Count</label>
+      <input type="number" class="form-control"   name="Adult" placeholder="Adult" required>
+
+    </div>
+           <div class="col-auto">
+      <label >Children Count</label>
+      <input type="number"  class="form-control"  name="children" placeholder="children" required>
+
+    </div>
+        </div>
+<hr>
+          <!-- Header -->
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+              <label class="">street address</label>
+                <input type="text"  name="rstreetaddress" class="form-control" required>
+                
+              </div>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+              <label  class="">locality</label>
+                <input type="text"  name="locality" class="form-control" required>
+                
+              </div>
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+          <!-- Grid row -->
+          <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+              <label  class="">city</label>
+                <input type="text"  name="city" class="form-control" required>
+                
+              </div>
+            </div>
+            <!-- Grid column -->
+
+            <!-- Grid column -->
+            <div class="col-md-6">
+              <div class="md-form mb-0">
+              <label for="form-contact-company" class="">Pincode</label>
+                <input type="text" id="form-contact-company" name="pincode" class="form-control" required>
+                
+              </div>
+            </div>
+            <!-- Grid column -->
+
+          </div>
+          <!-- Grid row -->
+
+          <!-- Grid row -->
+          <div class="row">
+               <div class="col-md-6">
+              <div class="md-form mb-0">
+              <label for="form-contact-company" class="">Phone Number</label>
+                <input type="number" id="f" name="phonenumber" class="form-control" required>
+                
+              </div>
+            </div>
+               <div class="col-md-6">
+
+            <div class="md-form mb-0">
+
+                  <input type="submit"  class="btn float-right btn-outline-info col-lg-6" value="checkout">
+            </div>
+            <!-- Grid column -->
+            </div>
+          </div>
+          <!-- Grid row -->
+
+        </div>
+
+
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+
+
+
+      <!-- Grid column -->
+
+
+
+</form>
+  </div>
+    <!-- Grid row -->
+<!-- Modal -->
+
+
+
+</body>
+</html>

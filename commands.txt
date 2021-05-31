@@ -1,0 +1,52 @@
+to create virtual environment:---------
+     python -m venv {venv_name}
+
+
+activate venv:---------------
+    cd venv
+    cd Scripts
+    activate
+    cd ..
+    cd ..
+
+to install django:------------
+    pip install django
+
+to create admin module:-------------
+    django-admin startproject core . 
+
+to start a new app:--------------
+    python manage.py startapp store 
+
+in core register store under installed apps 
+
+
+
+
+
+
+
+--------- optimization ------------
+
+p --- food item 
+q --- rooms
+
+x --- no.of items ordered
+y --- no.of rooms booked
+
+p --- 40min in A and 50min in B 
+q --- 30min in A and 40min in B 
+
+A --- 24hrs
+B --- 12hrs
+
+profit per p --- 50/-
+profit per q --- 270/-
+
+50x+270y
+
+40x+30y<=1440
+50x+40y<=720
+
+x>0
+y>0

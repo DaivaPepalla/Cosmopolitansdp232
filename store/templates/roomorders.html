@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+    <style>
+form {
+  width: 100px;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+button:hover,
+button:hover + button,
+button:hover + button + button,
+button:hover + button + button + button,
+button:hover + button + button + button + button {
+  color: #faa;
+}
+</style>
+    {% load cart %}
+</head>
+<body>
+
+
+<!--navbar start-->
+    <div class="fixed-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{ '/media/images/user.svg' }}">
+          </a>
+          
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% if user.is_authenticated %}
+            <li><a class="nav-link dropdown-item" href="">{{ user.username|title }}</a></li>
+            <hr>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:orders' %}" >Order History</a>
+            </li>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:roomorders' %}" >Booking History</a>
+            </li>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:logout' %}" >Logout</a>
+            </li>
+            {% else %}
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:signup' %}" >Signup</a>
+            </li>
+            <hr>
+            <li class="selected">
+            <a class="nav-link dropdown-item" href="{% url 'store:login' %}" >Login</a>
+            </li>
+            {% endif %}
+            </ul>
+            
+        </li>
+         
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'store:menu' %}">Menu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:rooms' %}">Book Rooms</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:cart' %}">Cart</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:roomcart' %}">Bookings-Cart</a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:about' %}">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:home' %}#ourteam">Our team</a>
+              </li>
+
+              {% if user.username == 'admin' %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:visualize' %}">Visualize</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'store:optimize' %}">Optimize</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+    </nav>
+    
+
+    </div>
+    <!--navbar ends-->
+
+
+<br><br><br>
+
+
+
+<!--room orders ends-->
+
+
+<div class="container">
+   <div class="border rounded p-3 m-43">
+        <p class="display-3 pl-3 ml-3" style="text-align:center">Previous Bookings</p>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sno.</th>
+                    <th>Image</th>
+                    <th>Room Type</th>
+                    <th>Checkin Date</th>
+                    <th>Days</th>
+                    <th>Adults</th>
+                    <th>Children</th>
+
+                    <th>Price</th>
+                    <th>Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for order in orders %}
+
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><img style="height: 80px;" class="rounded-circle" src="{{order.item.image.url}}" alt=""></td>
+                    <td>{{order.item.name}}</td>
+                    <td>{{order.checkin}}</td>
+                    <td>{{order.days}}</td>
+                    <td>{{order.adult}}</td>
+                    <td>{{order.children}}</td>
+                    <td>{{order.price}}</td>
+
+
+                    <td><form action="" method="POST">
+                                        {% csrf_token %}
+
+  <input type="hidden" name="rate" value="{{order.item.id}}">
+                        <input type="hidden" name="roomname" value="{{order.item.name}}">
+
+  <button type="submit" name="rating[rating]" value="5">&#9733;</button>
+  <button type="submit" name="rating[rating]" value="4">&#9733;</button>
+  <button type="submit" name="rating[rating]" value="3">&#9733;</button>
+  <button type="submit" name="rating[rating]" value="2">&#9733;</button>
+  <button type="submit" name="rating[rating]" value="1">&#9733;</button>
+                    </form></td>
+
+
+
+
+
+                </tr>
+
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+   </div>
+</div>
+
+
+<!--room orders ends-->
+
+
+<br><br><br><br><br><br><br><br><br><br><br>
+
+<!--page footer start-->
+    <div class="bg-dark footer">
+    <div class="container">
+       <div class="row text-center">
+         <a href="home.html"><img src="{{ '/media/images/below-logo.jpeg' }}" ></a>
+       </div>
+
+       <hr style="color:gray">
+
+       <div class="row text-center" style="color: ivory;">
+         <div class="col">
+           <ul>
+             
+              <h5><u>QUICK LINKS</u></h5>
+             
+             <li>
+              <a href="contact.html">contact us</a>
+            </li>
+            <li>
+              <a href="gallery.html">gallery</a>
+            </li>
+            <li>
+              <a href="home.html#ourteam">our team</a>
+            </li>
+            <li>
+              <a href="aboutus.html">about us</a>
+            </li>
+           </ul>
+         </div>
+
+         <div class="col">
+          <h5><u>ADDRESS</u></h5> 
+          <p>Cosmopolitan Restaurant,<br>Hyderabad.<br>pincode:500 020<br>email: abc@gmail.com</p>
+         </div>
+
+         <div class="col">
+           <h5><u>VISIT US AT</u></h5>
+           
+           <a href="#facebook" class="fa fa-facebook"></a>
+           <a href="https://youtu.be/mAFltQ2H8nA" class="fa fa-youtube"></a>
+           <a href="#instagram" class="fa fa-instagram"></a>
+         </div>
+       </div>
+    </div>
+  </div>
+    <!--page footer ends-->
+</body>
+</html>

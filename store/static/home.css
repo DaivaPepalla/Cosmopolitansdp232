@@ -1,0 +1,103 @@
+
+/* nav bar css */
+.nav-link:hover{
+    padding: 10px;
+    transition: all .5s;
+    background-color: rgb(230, 114, 114);
+}
+
+
+
+
+/* carousel css */
+.carousel-inner > .carousel-item > img{
+    width: 640px;
+    height: 700px;
+}
+
+
+
+
+/* parallax css */
+.parallax{
+    min-height: 500px; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+
+
+
+
+
+
+/* Welcome css */
+.col > img{
+    height: 60%;
+    width: 100%;
+}
+.col > h4{
+    text-align: center;
+    align-items: center;
+    text-shadow: 2px 2px 3px gray;
+}
+
+
+
+
+
+
+/* About us css */
+.about{
+    text-align: center;
+    text-shadow: 2px 2px 3px gray;
+}
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card > img{
+    width:100%;
+    height:300px;
+}
+.card{
+    align-items: center;
+}
+
+
+
+/* footer css */
+.footer > .container > .row > .col > ul > li {
+    color: rgb(243, 238, 230);
+}
+
+.footer > .container > .row > .col > ul > li > a{
+    text-decoration: none;
+}
+
+.footer > .container > .row > .col > ul{
+    list-style-type:none
+}
+.fa {
+    padding: 10px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+}
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+  

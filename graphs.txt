@@ -1,0 +1,12 @@
+data visualization:
+
+
+1. item-price
+
+2. item-review
+
+3. price-review
+
+4. room-price
+
+5. 
